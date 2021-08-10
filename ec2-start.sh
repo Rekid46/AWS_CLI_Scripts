@@ -1,6 +1,5 @@
 #!/bin/bash
 read -p "Please Enter The Name of Instance You Want To Start:  " Instance
-aws configure set default_output_format text
 InstanceId=$(aws ec2 describe-instances --query "Reservations[*].Instances[*].{Id:InstanceId}" --filters "Name=tag:Name,Values='*$InstanceName*'" --output text)
 start=$(aws ec2 start-instances --instance-ids $InstanceId)
 read -p "Do you want to SSM into $InstanceName Instance: " WantSSM
