@@ -17,6 +17,7 @@ else
     $(exit)
 fi
 
+aws configure set default_output_format text
 InstanceId=$(aws ec2 describe-instances --query "Reservations[*].Instances[*].{Id:InstanceId}" --filters "Name=tag:Name,Values='*$InstanceName*'" --output text)
 echo -e "Instance Id is $InstanceId \n"
 start=$(aws ec2 start-instances --instance-ids $InstanceId)
